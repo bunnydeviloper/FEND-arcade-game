@@ -34,6 +34,10 @@ Enemy.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+const allEnemies = [];
+const enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256); // what is the reasoning behind these number?
+allEnemies.push(enemy);
+
 
 
 // This listens for key presses and sends the keys to your
