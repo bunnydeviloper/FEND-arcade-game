@@ -23,14 +23,13 @@ class Enemy extends AllSprites {
 
   update(timeDelta) {
     this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
+    checkCollisions();
 
     // when enemies go off canvas, reset position to appear from left to right and increase speed a little
     if (this.x > 505) {
       this.x = -101;
       this.speed += 25;
     }
-
-    // TODO: add collision checking
   }
 }
 
@@ -54,7 +53,6 @@ class Player extends AllSprites {
       this.x = 200;
       this.y = 380;
     }
-
   }
 
   handleInput(keyPress) {
@@ -82,6 +80,19 @@ allEnemies.push(enemy);
 
 // Place the player object in a variable called player
 const player = new Player('images/char-boy.png', 200, 380, 50);
+
+function checkCollisions() {
+  allEnemies.forEach(function(enemy) {
+    if (player.y + 131 >= enemy.y + 90
+      && player.x + 25 <= enemy.x + 88
+      && player.y + 73 <= enemy.y + 135
+      && player.x + 76 >= enemy.x + 11) {
+      alert('hit');
+      player.x = 200;
+      player.y = 380;
+    }
+  });
+}
 
 document.addEventListener('keyup', function(e) {
   var allowedKeys = {
