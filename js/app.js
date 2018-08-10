@@ -91,7 +91,30 @@ const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Mat
 allEnemies.push(enemy);
 
 // Instantiate your Player
-const player = new Player('images/char-boy.png', 200, 380, 50);
+let player = new Player('images/char-boy.png', 200, 380, 50);
+
+const avatars = [
+  'images/char-boy.png',
+  'images/char-cat-girl.png',
+  'images/char-horn-girl.png',
+  'images/char-pink-girl.png',
+  'images/char-princess-girl.png',
+];
+
+const avatarList = document.getElementById('avatarList');
+
+const displayAvatar = (function(avatars) {
+  for (i = 0; i < avatars.length; i++) {
+    const avatarElem = document.createElement('img');
+    const avatar = avatars[i];
+    avatarElem.src = avatar;
+    avatarElem.addEventListener('click', function() {
+      avatarList.style.display = "none";
+      return player = new Player(avatar, 200, 380, 50);
+    });
+    avatarList.appendChild(avatarElem);
+  }
+})(avatars);
 
 function checkCollisions() {
   allEnemies.forEach(function(enemy) {
@@ -128,7 +151,8 @@ const reset = document.getElementById('reset');
 reset.addEventListener('click', function() {
   score = 0;
   level = 0;
-  gameOver.style.display = 'none';
+  gameOver.style.display = "none";
+  avatarList.style.display = "block";
   displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
   player.x = 200;
   player.y = 380;
