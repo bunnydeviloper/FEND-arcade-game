@@ -45,6 +45,11 @@ class Player extends AllSprites {
   render() {
     super.render();
   }
+  resetPosition() {
+    displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
+    this.x = 200;
+    this.y = 380;
+  }
   update() {
 
     // prevent player from going off the right, left, and bottom edge
@@ -52,16 +57,19 @@ class Player extends AllSprites {
     if (this.x < 0) this.x = 0;
     if (this.y > 380) this.y = 380;
 
+    if (score < 0) {
+      score = 0;
+      level = 0;
+      // TODO: alert game over
+      this.resetPosition();
+    }
 
     // player wins when reaches the top edge, alert winning, reset position, and level up
     if (this.y <= -21) {
       score += 100;
       level++;
-      displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
       levelUp(level);
-
-      this.x = 200;
-      this.y = 380;
+      this.resetPosition();
     }
   }
   handleInput(keyPress) {
@@ -98,9 +106,7 @@ function checkCollisions() {
       && player.y + 73 <= enemy.y + 135
       && player.x + 76 >= enemy.x + 11) {
       score -= 30;
-      displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
-      player.x = 200;
-      player.y = 380;
+      player.resetPosition();
     }
   });
 }
