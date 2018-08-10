@@ -13,10 +13,6 @@ h2, h3 {
   margin-bottom: 0;
 }
 
-img#levelup {
-  width: 50px;
-}
-
 div#gameOver {
   display: none; /* Hidden by default */
   position: fixed;
