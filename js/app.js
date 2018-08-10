@@ -24,10 +24,9 @@ class Enemy extends AllSprites {
     this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
     checkCollisions();
 
-    // when enemies go off canvas, reset position to appear from left to right and increase speed a little
+    // when enemies go off canvas, reset position to appear from left to right
     if (this.x > 505) {
       this.x = -101;
-      this.speed += 25;
     }
   }
 }
@@ -98,8 +97,7 @@ class Player extends AllSprites {
 
 // Instantiate your Enemy
 const allEnemies = [];
-// const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 184 + 50, Math.random() * 256);
-const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 50, Math.random() * 200);
+const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 200);
 allEnemies.push(enemy);
 
 // Place the player object in a variable called player
@@ -123,7 +121,7 @@ function levelUp(level) {
 
   // load new set of enemies
   for (var i = 0; i <= level; i++) {
-    const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 50, Math.random() * 200);
+    const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 200);
     allEnemies.push(enemy);
   }
 }
