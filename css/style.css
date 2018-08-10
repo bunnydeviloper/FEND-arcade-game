@@ -1,7 +1,7 @@
 body {
   text-align: center;
-  width: 800px;
-  max-width: 100%;
+  width: 505px; /* same width as the canvas */
+  margin: auto;
 }
 
 div#gameOver {
