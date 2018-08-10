@@ -15,15 +15,20 @@ class AllSprites {
 class Enemy extends AllSprites {
   constructor(sprite, x, y, speed) {
     super(sprite, x, y, speed);
+    this.x -= 100; // make Enemy ease in naturally from left side
   }
   render() {
     super.render();
   }
 
-  update(dt) { // dt is a time delta between ticks
-    this.x += this.speed * dt; // this ensure game run at same speed for all computer
+  update(timeDelta) {
+    this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
 
-    // TODO: add if stmt for when enemies go off canvas
+    // when enemies go off canvas, reset position to start from left to right and increase speed
+    if (this.x > 505) {
+      this.x = -101;
+      this.speed += 25;
+    }
     // TODO: add collision checking
   }
 }
@@ -48,7 +53,7 @@ class Player extends AllSprites {
 
 // Instantiate your Enemy
 const allEnemies = [];
-const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 184 + 50, Math.random() * 256); // what is the reasoning behind these number?
+const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 184 + 50, Math.random() * 256);
 allEnemies.push(enemy);
 
 // Place the player object in a variable called player
