@@ -2,8 +2,8 @@ frontend-nanodegree-arcade-game
 ===============================
 
 ## Checkout the game demo [here](https://bunnydeviloper.github.io/frontend-nanodegree-arcade-game/)
-<img src="screenshot1.png">
-<img src="screenshot2.png">
+<img src="images/screenshot1.png">
+<img src="images/screenshot2.png">
 
 [Project rubric](https://review.udacity.com/#!/projects/2696458597/rubric)
 
