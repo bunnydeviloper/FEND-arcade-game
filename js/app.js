@@ -20,7 +20,6 @@ class Enemy extends AllSprites {
   render() {
     super.render();
   }
-
   update(timeDelta) {
     this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
     checkCollisions();
@@ -33,6 +32,12 @@ class Enemy extends AllSprites {
   }
 }
 
+let score = 0;
+let level = 0;
+const displayScore = document.createElement('p');
+document.body.append(displayScore);
+displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
+
 class Player extends AllSprites {
   constructor(sprite, x, y, speed) {
     super(sprite, x, y, speed);
@@ -40,21 +45,25 @@ class Player extends AllSprites {
   render() {
     super.render();
   }
-
   update() {
+
     // prevent player from going off the right, left, and bottom edge
     if (this.x > 400) this.x = 400;
     if (this.x < 0) this.x = 0;
     if (this.y > 380) this.y = 380;
 
-    // player wins when reaches the top edge, alert winning and then reset position
+
+    // player wins when reaches the top edge, alert winning, reset position, and level up
     if (this.y <= -21) {
-      alert('win');
+      score += 100;
+      level++;
+      displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
+      levelUp(level);
+
       this.x = 200;
       this.y = 380;
     }
   }
-
   handleInput(keyPress) {
     switch(keyPress) {
       case 'left':
@@ -75,7 +84,8 @@ class Player extends AllSprites {
 
 // Instantiate your Enemy
 const allEnemies = [];
-const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 184 + 50, Math.random() * 256);
+// const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 184 + 50, Math.random() * 256);
+const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 50, Math.random() * 200);
 allEnemies.push(enemy);
 
 // Place the player object in a variable called player
@@ -87,11 +97,23 @@ function checkCollisions() {
       && player.x + 25 <= enemy.x + 88
       && player.y + 73 <= enemy.y + 135
       && player.x + 76 >= enemy.x + 11) {
-      alert('hit');
+      score -= 30;
+      displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
       player.x = 200;
       player.y = 380;
     }
   });
+}
+
+function levelUp(level) {
+  // remove all previous enemies on canvas
+  allEnemies.length = 0;
+
+  // load new set of enemies
+  for (var i = 0; i <= level; i++) {
+    const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 50, Math.random() * 200);
+    allEnemies.push(enemy);
+  }
 }
 
 document.addEventListener('keyup', function(e) {
