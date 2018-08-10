@@ -56,10 +56,10 @@ class Player extends AllSprites {
         this.x += this.speed + 50;
         break;
       case 'up':
-        this.y -= this.speed + 30;
+        this.y -= this.speed + 30; // note: y axis starts from top, and the rock distance is smaller
         break;
       case 'down':
-        this.y += this.speed + 30;
+        this.y += this.speed + 30; // note: y axis starts from top, and the rock distance is smaller
         break;
     }
   }
@@ -76,9 +76,13 @@ const player = new Player('images/char-boy.png', 200, 380, 50);
 document.addEventListener('keyup', function(e) {
   var allowedKeys = {
     37: 'left',
+    72: 'left', // key h
     38: 'up',
+    75: 'up', // key k
     39: 'right',
-    40: 'down'
+    76: 'right', // key l
+    40: 'down',
+    74: 'down',  // key j
   };
 
   player.handleInput(allowedKeys[e.keyCode]);
