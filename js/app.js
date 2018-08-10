@@ -50,6 +50,10 @@ class Player extends AllSprites {
     this.x = 200;
     this.y = 380;
   }
+  restart() {
+    score = 0;
+    level = 0;
+  }
   update() {
 
     // prevent player from going off the right, left, and bottom edge
@@ -57,10 +61,10 @@ class Player extends AllSprites {
     if (this.x < 0) this.x = 0;
     if (this.y > 380) this.y = 380;
 
+    // if the score becomes negative, pop up game over and reset the game
     if (score < 0) {
-      score = 0;
-      level = 0;
-      // TODO: alert game over
+      const gameOver = document.getElementById('gameOver');
+      gameOver.style.display = 'block';
       this.resetPosition();
     }
 
@@ -73,19 +77,21 @@ class Player extends AllSprites {
     }
   }
   handleInput(keyPress) {
-    switch(keyPress) {
-      case 'left':
-        this.x -= this.speed + 50;
-        break;
-      case 'right':
-        this.x += this.speed + 50;
-        break;
-      case 'up':
-        this.y -= this.speed + 30; // note: y axis starts from top, and the rock distance is smaller
-        break;
-      case 'down':
-        this.y += this.speed + 30; // note: y axis starts from top, and the rock distance is smaller
-        break;
+    if (score >= 0) {
+      switch(keyPress) {
+        case 'left':
+          this.x -= this.speed + 50;
+          break;
+        case 'right':
+          this.x += this.speed + 50;
+          break;
+        case 'up':
+          this.y -= this.speed + 30; // note: y axis starts from top, and the rock distance is smaller
+          break;
+        case 'down':
+          this.y += this.speed + 30; // note: y axis starts from top, and the rock distance is smaller
+          break;
+      }
     }
   }
 }
