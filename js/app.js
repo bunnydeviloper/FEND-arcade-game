@@ -1,3 +1,10 @@
+let score = 0;
+let level = 0;
+const displayScore = document.createElement('h3');
+document.body.append(displayScore);
+displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
+const gameOver = document.getElementById('gameOver');
+
 // ------------------ parent class AllSprites ----------------------
 class AllSprites {
   constructor(sprite, x, y, speed) {
@@ -23,20 +30,12 @@ class Enemy extends AllSprites {
   update(timeDelta) {
     this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
     checkCollisions();
-
     // when enemies go off canvas, reset position to appear from left to right
-    if (this.x > 505) {
-      this.x = -101;
-    }
+    if (this.x > 505) this.x = -101;
   }
 }
 
-let score = 0;
-let level = 0;
-const displayScore = document.createElement('p');
-document.body.append(displayScore);
-displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
-
+// ------------------ children of AllSprites ----------------------
 class Player extends AllSprites {
   constructor(sprite, x, y, speed) {
     super(sprite, x, y, speed);
@@ -49,29 +48,20 @@ class Player extends AllSprites {
     this.x = 200;
     this.y = 380;
   }
-  restart() {
-    score = 0;
-    level = 0;
-  }
   update() {
-
     // prevent player from going off the right, left, and bottom edge
     if (this.x > 400) this.x = 400;
     if (this.x < 0) this.x = 0;
     if (this.y > 380) this.y = 380;
 
     // if the score becomes negative, pop up game over and reset the game
-    if (score < 0) {
-      const gameOver = document.getElementById('gameOver');
-      gameOver.style.display = 'block';
-      this.resetPosition();
-    }
+    if (score < 0) gameOver.style.display = 'block';
 
     // player wins when reaches the top edge, alert winning, reset position, and level up
     if (this.y <= -21) {
       score += 100;
       level++;
-      levelUp(level);
+      levelUp();
       this.resetPosition();
     }
   }
@@ -97,10 +87,10 @@ class Player extends AllSprites {
 
 // Instantiate your Enemy
 const allEnemies = [];
-const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 200);
+const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 300);
 allEnemies.push(enemy);
 
-// Place the player object in a variable called player
+// Instantiate your Player
 const player = new Player('images/char-boy.png', 200, 380, 50);
 
 function checkCollisions() {
@@ -115,15 +105,9 @@ function checkCollisions() {
   });
 }
 
-function levelUp(level) {
-  // remove all previous enemies on canvas
-  allEnemies.length = 0;
-
-  // load new set of enemies
-  for (var i = 0; i <= level; i++) {
-    const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 200);
-    allEnemies.push(enemy);
-  }
+function levelUp() {
+  const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 300);
+  allEnemies.push(enemy);
 }
 
 document.addEventListener('keyup', function(e) {
@@ -137,6 +121,16 @@ document.addEventListener('keyup', function(e) {
     40: 'down',
     74: 'down',  // key j
   };
-
   player.handleInput(allowedKeys[e.keyCode]);
+});
+
+const reset = document.getElementById('reset');
+reset.addEventListener('click', function() {
+  score = 0;
+  level = 0;
+  gameOver.style.display = 'none';
+  displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
+  player.x = 200;
+  player.y = 380;
+  levelUp();
 });
