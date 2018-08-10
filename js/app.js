@@ -48,10 +48,11 @@ class Player extends AllSprites {
     if (this.x < 0) this.x = 0;
     if (this.y > 380) this.y = 380;
 
-    // player wins when reaches the top edge
-    if (this.y === 0) {
-      this.y = 0;
-      console.log('winnnn');
+    // player wins when reaches the top edge, alert winning and then reset position
+    if (this.y <= -21) {
+      alert('win');
+      this.x = 200;
+      this.y = 380;
     }
 
   }
