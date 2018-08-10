@@ -1,5 +1,7 @@
 body {
   text-align: center;
+  width: 800px;
+  max-width: 100%;
 }
 
 div#gameOver {
@@ -15,10 +17,10 @@ div#gameOver {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-div#gameOver img {
+div#gameOver img#over {
   max-height: 100%;
   max-width: 100%;
-  width: auto;
+  width: 500px;
   height: auto;
   position: absolute;
   top: 0;
@@ -26,4 +28,11 @@ div#gameOver img {
   left: 0;
   right: 0;
   margin: auto;
+}
+
+div#gameOver img#reset {
+  cursor: pointer;
+  width: 250px;
+  max-width: 70%;
+  margin-top: 60px;
 }
