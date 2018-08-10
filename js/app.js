@@ -94,7 +94,7 @@ allEnemies.push(enemy);
 let player = new Player('images/char-boy.png', 200, 380, 50);
 
 // Instantiate levelup sign, position off canvas to the right
-let levelUpSign = new Player('images/levelup.png', 650, 70, 0);
+const levelUpSign = new Player('images/levelup.png', 650, 70, 0);
 
 const avatars = [
   'images/char-boy.png',
@@ -134,12 +134,11 @@ function checkCollisions() {
 function levelUp() {
   const enemy = new Enemy('images/enemy-bug.png', 0, Math.random() * 200 + 40, Math.random() * 300);
   allEnemies.push(enemy);
-
   // make level up sign appear for 1 second and then disappear
   levelUpSign.x = 450;
   setTimeout(function() {
     levelUpSign.x = 650;
-  }, 1000);
+  }, 2000);
 }
 
 document.addEventListener('keyup', function(e) {
