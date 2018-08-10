@@ -43,8 +43,17 @@ class Player extends AllSprites {
   }
 
   update() {
-    // TODO: prevent player from going off the edges
-    // TODO: player wins when reaches the top edge
+    // prevent player from going off the right, left, and bottom edge
+    if (this.x > 400) this.x = 400;
+    if (this.x < 0) this.x = 0;
+    if (this.y > 380) this.y = 380;
+
+    // player wins when reaches the top edge
+    if (this.y === 0) {
+      this.y = 0;
+      console.log('winnnn');
+    }
+
   }
 
   handleInput(keyPress) {
