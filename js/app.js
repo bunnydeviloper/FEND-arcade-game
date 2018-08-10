@@ -15,7 +15,7 @@ class AllSprites {
 class Enemy extends AllSprites {
   constructor(sprite, x, y, speed) {
     super(sprite, x, y, speed);
-    this.x -= 100; // make Enemy ease in naturally from left side
+    this.x -= 100; // make Enemy ease in naturally from the left side
   }
   render() {
     super.render();
@@ -24,11 +24,12 @@ class Enemy extends AllSprites {
   update(timeDelta) {
     this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
 
-    // when enemies go off canvas, reset position to start from left to right and increase speed
+    // when enemies go off canvas, reset position to appear from left to right and increase speed a little
     if (this.x > 505) {
       this.x = -101;
       this.speed += 25;
     }
+
     // TODO: add collision checking
   }
 }
@@ -47,7 +48,20 @@ class Player extends AllSprites {
   }
 
   handleInput(keyPress) {
-    // do something when user click up down left right
+    switch(keyPress) {
+      case 'left':
+        this.x -= this.speed + 50;
+        break;
+      case 'right':
+        this.x += this.speed + 50;
+        break;
+      case 'up':
+        this.y -= this.speed + 30;
+        break;
+      case 'down':
+        this.y += this.speed + 30;
+        break;
+    }
   }
 }
 
