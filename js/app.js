@@ -1,3 +1,5 @@
+'use strict';
+
 let score = 0;
 let level = 0;
 const displayScore = document.createElement('h3');
@@ -29,7 +31,7 @@ class Enemy extends AllSprites {
   }
   update(timeDelta) {
     this.x += this.speed * timeDelta; // this ensure the game run at same speed for all computer
-    checkCollisions();
+    player.checkCollisions();
     // when enemies go off canvas, reset position to appear from left to right
     if (this.x > 505) this.x = -101;
   }
@@ -107,7 +109,7 @@ const avatars = [
 const avatarList = document.getElementById('avatarList');
 
 const displayAvatar = (function(avatars) {
-  for (i = 0; i < avatars.length; i++) {
+  for (let i = 0; i < avatars.length; i++) {
     const avatarElem = document.createElement('img');
     const avatar = avatars[i];
     avatarElem.src = avatar;
@@ -119,7 +121,7 @@ const displayAvatar = (function(avatars) {
   }
 })(avatars);
 
-function checkCollisions() {
+Player.prototype.checkCollisions = function checkCollisions() {
   allEnemies.forEach(function(enemy) {
     if (player.y + 131 >= enemy.y + 90
       && player.x + 25 <= enemy.x + 88
@@ -162,7 +164,6 @@ reset.addEventListener('click', function() {
   gameOver.style.display = "none";
   avatarList.style.display = "block";
   displayScore.innerHTML = `SCORE: ${score}, LEVEL: ${level}`;
-  player.x = 200;
-  player.y = 380;
+  player.resetPosition();
   levelUp();
 });
