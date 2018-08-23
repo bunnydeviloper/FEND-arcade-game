@@ -2,9 +2,7 @@
 
 ## Checkout the game demo [here](https://bunnydeviloper.github.io/FEND-arcade-game/)
 <img src="images/screenshot1.png" alt="screenshot 1" width="300px">
-![screenshot2.png](images/screenshot2.png?raw=true "Screenshot")
-
-![screenshot2.png](https://github.com/bunnydeviloper/FEND-arcade-game/blob/master/images/screenshot2.png){:width="300px"}
+<img src="images/screenshot2.png" alt="screenshot 2" width="300px">
 
 [Project rubric](https://review.udacity.com/#!/projects/2696458597/rubric)
 
