@@ -8,11 +8,11 @@
 
 ## Usage
 If you would like to run this application locally or add any new features to the game:
-  1. Clone (or fork) the app:
+  1. Clone (or fork) the app:  
     `$ [sudo] git clone https://github.com/bunnydeviloper/FEND-arcade-game.git`
-  2. Easy open (make sure you `cd` into the app's directory):
+  2. Easy open (make sure you `cd` into the app's directory):  
     `$ open index.html` (MacOS) or `start index.html` (Windows)
-  3. Alternatively, you can run a simple server and open the app:
+  3. Alternatively, you can run a simple server and open the app:  
     `$ [sudo] python -m SimpleHTTPServer`, then navigate to `localhost:8000` in your browser
 
 ### Basic Functionality
