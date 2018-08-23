@@ -4,7 +4,7 @@
 <img src="images/screenshot1.png" alt="screenshot 1" width="300px">
 ![screenshot2.png](images/screenshot2.png)
 
-![screenshot2.png](https://github.com/bunnydeviloper/FEND-arcade-game/blob/master/images/screenshot2.png&s=300)
+![screenshot2.png](https://github.com/bunnydeviloper/FEND-arcade-game/blob/master/images/screenshot2.png =300)
 
 [Project rubric](https://review.udacity.com/#!/projects/2696458597/rubric)
 
